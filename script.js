@@ -139,12 +139,48 @@ bulkAddSubmitBtn.addEventListener('click', addBulkWords);
 
 // --- 初期化処理 ---
 function init() {
-    loadData();
-    populateDeckSelector();
-    currentDeckName = appData.lastSelectedDeck && appData.decks[appData.lastSelectedDeck] ? appData.lastSelectedDeck : Object.keys(appData.decks)[0];
-    deckSelector.value = currentDeckName;
-    toggleView('learning');
-    generateWordList();
+// script.js
+
+// ... (他のコードはそのまま)
+
+function loadData() {
+    const savedData = localStorage.getItem('myVocabularyApp_data');
+    if (savedData) {
+        appData = JSON.parse(savedData);
+        // 古いデータ構造に decks がない場合などのための互換性処理
+        if (!appData.decks || Object.keys(appData.decks).length === 0) {
+            appData.decks = {};
+        }
+    } else {
+        // localStorageにデータがない場合、初めての初期化処理
+        appData = {
+            decks: {},
+            lastSelectedDeck: Object.keys(initialDecksData)[0] || '' // 最初のデッキ名を設定
+        };
+
+        // data.js のシンプルなデータを、プログラム用の完全なオブジェクト形式に変換
+        for (const deckName in initialDecksData) {
+            const wordArray = initialDecksData[deckName];
+            appData.decks[deckName] = [];
+            for (let i = 0; i < wordArray.length; i += 2) {
+                const front = wordArray[i];
+                const back = wordArray[i + 1];
+                if (front && back) { // frontとbackが両方存在することを確認
+                    appData.decks[deckName].push({
+                        front: front,
+                        back: back,
+                        memorized: false,
+                        correctCount: 0,
+                        incorrectCount: 0
+                    });
+                }
+            }
+        }
+        saveData(); // 変換したデータをlocalStorageに保存
+    }
+}
+
+// ... (他のコードはそのまま)
 }
 
 // --- 省略された関数の実装 ---
