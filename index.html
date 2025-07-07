@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>オンライン単語帳</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>オンライン単語帳</h1>
+
+        <div class="view-toggle-container">
+            <button id="showLearningViewBtn" class="btn btn-secondary">学習モード</button>
+            <button id="showListViewBtn" class="btn btn-secondary">単語一覧モード</button>
+        </div>
+
+        <!-- 学習ビュー -->
+        <div id="learningView">
+            <div class="deck-management">
+                <h2 class="section-title">単語セット管理</h2>
+                <div class="deck-selector-container">
+                    <select id="deckSelector"></select>
+                    <div class="deck-buttons">
+                        <button id="addDeckBtn" class="btn btn-primary" title="新しいセットを作成">+</button>
+                        <button id="renameDeckBtn" class="btn btn-secondary" title="選択中のセット名を変更">Renaming</button>
+                        <button id="deleteDeckBtn" class="btn reset-btn" title="選択中のセットを削除">×</button>
+                    </div>
+                </div>
+            </div>
+            
+            <h2 class="section-title">学習カード</h2>
+            <div id="card-container">
+                <div id="card">
+                    <div class="card-face card-front"></div>
+                    <div class="card-face card-back"></div>
+                </div>
+            </div>
+            <div id="word-stats"></div>
+            <div class="mark-buttons">
+                <button id="notMemorizedBtn" class="btn">(←) まだ</button>
+                <button id="memorizedBtn" class="btn">(→) 覚えた</button>
+            </div>
+            
+            <div class="options-status">
+                <div>
+                    <input type="checkbox" id="randomMode">
+                    <label for="randomMode">ランダム表示</label>
+                      
+                    <input type="checkbox" id="reviewMode">
+                    <label for="reviewMode">覚えていない単語だけ復習</label>
+                </div>
+                <p id="status"></p>
+                <button id="resetBtn" class="btn reset-btn">成績履歴をリセット</button>
+            </div>
+        </div>
+
+        <!-- 単語一覧ビュー -->
+        <div id="listView" class="hidden">
+            <h2 class="section-title" id="listTitle">単語一覧</h2>
+            <div class="add-word-container">
+                <div class="add-word-form">
+                    <input type="text" id="newFront" placeholder="単語 (例: apple)">
+                    <input type="text" id="newBack" placeholder="意味 (例: りんご)">
+                    <button id="addBtn" class="btn btn-primary">追加</button>
+                </div>
+                <button id="toggleBulkAddBtn" class="btn btn-secondary" style="width:100%">一括で追加する</button>
+                <div id="bulkAddContainer" class="hidden">
+                    <p>1行に1単語、カンマ(,)かタブで区切って入力してください。<br>例: apple,りんご</p>
+                    <textarea id="bulkWordInput" placeholder="apple,りんご
+book,本
+car,車"></textarea>
+                    <div class="bulk-buttons">
+                        <button id="bulkAddCancelBtn" class="btn btn-secondary">キャンセル</button>
+                        <button id="bulkAddSubmitBtn" class="btn btn-primary">この内容で追加</button>
+                    </div>
+                </div>
+            </div>
+            <div id="wordListContainer">
+                <!-- 単語リストがここに動的に生成される -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- ▼ フィードバックアニメーション用の要素 ▼ -->
+    <div id="feedback-overlay"></div>
+
+    <!-- 読み込み順が重要 -->
+    <script src="data.js"></script>
+    <script src="script.js" defer></script>
+</body>
+</html>

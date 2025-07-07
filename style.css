@@ -1,0 +1,207 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #f0f2f5; color: #333; display: flex; justify-content: center;
+    align-items: flex-start; padding: 40px 15px; min-height: 100vh; box-sizing: border-box;
+}
+.container {
+    width: 100%; max-width: 550px; background: white; padding: 20px 30px;
+    border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+h1, h2, h3 { text-align: center; color: #1c1e21; }
+h2.section-title {
+    border-bottom: 2px solid #eee; padding-bottom: 8px; margin-bottom: 15px;
+    text-align: left; font-size: 1.2em;
+}
+
+/* --- デッキ管理 --- */
+.deck-management { margin-bottom: 30px; }
+.deck-selector-container { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+#deckSelector { flex-grow: 1; padding: 8px; font-size: 16px; border-radius: 4px; border: 1px solid #ccc; }
+.deck-buttons { display: flex; gap: 5px; }
+.deck-buttons button { padding: 8px 10px; font-size: 12px; }
+
+/* --- 単語追加 --- */
+.add-word-container { margin-bottom: 20px; }
+.add-word-form { display: flex; gap: 10px; margin-bottom: 10px; }
+.add-word-form input {
+    flex-grow: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;
+}
+#bulkAddContainer {
+    padding: 15px; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px;
+}
+#bulkAddContainer p { margin-top: 0; font-size: 14px; color: #555; }
+#bulkWordInput {
+    width: 100%; min-height: 120px; font-family: 'Courier New', Courier, monospace;
+    font-size: 14px; padding: 10px; border: 1px solid #ccc; border-radius: 4px;
+    box-sizing: border-box; resize: vertical; margin-bottom: 10px;
+}
+.bulk-buttons { display: flex; gap: 10px; justify-content: flex-end; }
+.hidden { display: none; }
+
+/* --- 学習カード --- */
+#card-container {
+    width: 100%; height: 160px; perspective: 1000px; margin: 10px auto;
+}
+#card {
+    width: 100%; height: 100%; position: relative; transform-style: preserve-3d;
+    transition: transform 0.6s; cursor: pointer; transform-origin: center center;
+}
+#card.is-flipped { transform: rotateX(180deg); }
+.card-face {
+    position: absolute; width: 100%; height: 100%; backface-visibility: hidden;
+    display: flex; justify-content: center; align-items: center; font-size: 26px;
+    font-weight: bold; text-align: center; border: 2px solid #ddd;
+    border-radius: 8px; background-color: #fff; padding: 10px; box-sizing: border-box;
+}
+.card-back { transform: rotateX(180deg); }
+
+#word-stats { text-align: center; font-size: 20px; margin: 10px 0 15px; height: 24px; }
+.stat-correct { color: #28a745; margin-right: 5px; }
+.stat-incorrect { color: #dc3545; }
+.mark-buttons button { width: 120px; }
+.btn {
+    padding: 10px 20px; font-size: 16px; border: none; border-radius: 4px;
+    cursor: pointer; transition: background-color 0.2s;
+}
+.btn-primary { background-color: #007bff; color: white; }
+.btn-primary:hover { background-color: #0056b3; }
+.btn-secondary { background-color: #6c757d; color: white; }
+.btn-secondary:hover { background-color: #5a6268; }
+
+#memorizedBtn { background-color: #17a2b8; color: white; }
+#notMemorizedBtn { background-color: #ffc107; color: black; }
+
+.options-status {
+    text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;
+}
+#status { font-weight: bold; }
+
+.reset-btn { background: #dc3545; color: white; margin-top: 10px; }
+/* style.css の末尾に追記 */
+
+/* --- ビュー切り替え --- */
+.view-toggle-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.view-toggle-container .btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* --- 単語一覧テーブル --- */
+#wordListContainer {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.word-list-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.word-list-table th, .word-list-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+.word-list-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+}
+.word-list-table td:nth-child(1) { font-weight: bold; }
+.word-list-table td:nth-child(3) { min-width: 80px; }
+.word-list-table td:nth-child(4) { width: 120px; text-align: right; }
+.list-op-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+    margin-left: 5px;
+}
+/* style.css の末尾に追記・修正 */
+
+/* --- ビュー切り替え --- */
+.view-toggle-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.view-toggle-container .btn.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* --- 単語一覧テーブル --- */
+#wordListContainer {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.word-list-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.word-list-table th, .word-list-table td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+.word-list-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+}
+/* ▼ 新しいスタイル ▼ */
+.word-list-table .word-toggle {
+    cursor: pointer;
+    font-weight: bold;
+}
+.word-list-table .word-toggle.is-back {
+    font-weight: normal;
+    font-style: italic;
+    color: #555;
+}
+/* ▲ 新しいスタイル ▲ */
+.word-list-table td:nth-child(2) { min-width: 80px; } /* 成績 */
+.word-list-table td:nth-child(3) { width: 120px; text-align: right; } /* 操作 */
+.list-op-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+    margin-left: 5px;
+}
+/* style.css の末尾に追記 */
+
+/* --- フィードバックアニメーション --- */
+#feedback-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none; /* 下の要素をクリックできるようにする */
+    z-index: 9999;
+}
+
+#feedback-overlay.show.correct {
+    background-color: rgba(40, 167, 69, 0.3); /* 緑 */
+    animation: flash 0.4s ease-out;
+}
+
+#feedback-overlay.show.incorrect {
+    background-color: rgba(220, 53, 69, 0.3); /* 赤 */
+    animation: flash 0.4s ease-out;
+}
+
+@keyframes flash {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
